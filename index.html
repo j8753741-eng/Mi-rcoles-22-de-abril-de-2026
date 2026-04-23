@@ -27,16 +27,16 @@
     *{margin:0;padding:0;box-sizing:border-box;}
 
     body{
-      background: radial-gradient(circle at top, rgba(124,58,237,0.20), transparent 55%),
-                  radial-gradient(circle at bottom, rgba(255,79,216,0.12), transparent 55%),
-                  linear-gradient(180deg, var(--bg1), var(--bg2));
-      color: var(--ink);
-      font-family: 'Poppins', sans-serif;
-      min-height: 100vh;
-      overflow-x: hidden;
-      padding: 40px 16px;
+  background: radial-gradient(circle at top, rgba(124,58,237,0.20), transparent 55%),
+              radial-gradient(circle at bottom, rgba(255,79,216,0.12), transparent 55%),
+              linear-gradient(180deg, var(--bg1), var(--bg2));
+  color: var(--ink);
+  font-family: 'Poppins', sans-serif;
+  min-height: 100vh;
+  overflow-x: hidden;
+  padding: 30px 8px;
     }
-
+    
     /* estrellas sutiles */
     body::before{
       content:"";
@@ -73,10 +73,10 @@
     }
 
     .container{
-      max-width: 980px;
-      margin: auto;
+  width: 100%;
+  max-width: 980px;
+  margin: auto;
     }
-
     /* header */
     .header{
       text-align:center;
@@ -175,7 +175,7 @@
     /* layout main */
     .grid{
   display:grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1.35fr 0.65fr;
   gap: 18px;
   margin-top: 18px;
 }
@@ -184,6 +184,8 @@
   .grid{
     grid-template-columns: 1fr;
   }
+}
+    
   .letter{
     padding: 22px 18px;
   }
@@ -193,7 +195,6 @@
     .letter{
       padding: 28px 24px;
       border-radius: 24px;
-      width:100%;
       background: linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.03));
       border: 1px solid rgba(168,85,247,0.25);
       box-shadow: 0 18px 50px rgba(0,0,0,0.65);
