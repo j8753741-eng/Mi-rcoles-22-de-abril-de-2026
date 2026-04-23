@@ -1,0 +1,896 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Carta Umbrella Academy</title>
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Playfair+Display:wght@400;600;700&family=Poppins:wght@300;400;500;600&display=swap');
+
+    :root{
+      --bg1:#05040a;
+      --bg2:#0b0615;
+      --ink:#f2eaff;
+      --soft:#d6c7ff;
+      --muted:#b89cff;
+      --violet:#a855f7;
+      --violet2:#7c3aed;
+      --pink:#ff4fd8;
+      --gold:#f7d774;
+      --glass:rgba(255,255,255,0.06);
+      --glass2:rgba(255,255,255,0.10);
+      --border:rgba(168,85,247,0.30);
+      --shadow:rgba(0,0,0,0.6);
+    }
+
+    *{margin:0;padding:0;box-sizing:border-box;}
+
+    body{
+      background: radial-gradient(circle at top, rgba(124,58,237,0.20), transparent 55%),
+                  radial-gradient(circle at bottom, rgba(255,79,216,0.12), transparent 55%),
+                  linear-gradient(180deg, var(--bg1), var(--bg2));
+      color: var(--ink);
+      font-family: 'Poppins', sans-serif;
+      min-height: 100vh;
+      overflow-x: hidden;
+      padding: 40px 16px;
+    }
+
+    /* estrellas sutiles */
+    body::before{
+      content:"";
+      position:fixed;
+      inset:0;
+      background-image: 
+        radial-gradient(rgba(255,255,255,0.10) 1px, transparent 1px),
+        radial-gradient(rgba(168,85,247,0.18) 1px, transparent 1px);
+      background-size: 90px 90px, 160px 160px;
+      background-position: 0 0, 40px 70px;
+      opacity:0.35;
+      pointer-events:none;
+      z-index:-2;
+    }
+
+    /* humo / neblina */
+    body::after{
+      content:"";
+      position:fixed;
+      inset:-200px;
+      background: radial-gradient(circle at 30% 30%, rgba(168,85,247,0.15), transparent 60%),
+                  radial-gradient(circle at 70% 60%, rgba(255,79,216,0.10), transparent 65%),
+                  radial-gradient(circle at 50% 90%, rgba(124,58,237,0.12), transparent 65%);
+      filter: blur(45px);
+      opacity:0.65;
+      pointer-events:none;
+      z-index:-1;
+      animation: drift 12s ease-in-out infinite alternate;
+    }
+
+    @keyframes drift{
+      0%{transform:translateY(0px) translateX(0px) scale(1);}
+      100%{transform:translateY(30px) translateX(-25px) scale(1.05);}
+    }
+
+    .container{
+      max-width: 980px;
+      margin: auto;
+    }
+
+    /* header */
+    .header{
+      text-align:center;
+      padding: 28px 18px 18px;
+      margin-bottom: 20px;
+      border-radius: 22px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02));
+      border: 1px solid rgba(168,85,247,0.25);
+      box-shadow: 0 18px 45px rgba(0,0,0,0.6);
+      position:relative;
+      overflow:hidden;
+    }
+
+    .header::before{
+      content:"☂";
+      position:absolute;
+      font-size:160px;
+      opacity:0.06;
+      top:-40px;
+      left:30px;
+      transform:rotate(-18deg);
+      color: var(--violet);
+      font-family:'Cinzel', serif;
+    }
+
+    .header::after{
+      content:"13";
+      position:absolute;
+      font-size:140px;
+      opacity:0.05;
+      bottom:-50px;
+      right:35px;
+      color: var(--pink);
+      font-family:'Cinzel', serif;
+    }
+
+    .title{
+      font-family:'Cinzel', serif;
+      font-size: 2.1rem;
+      font-weight:700;
+      letter-spacing:2px;
+      text-transform:uppercase;
+      color: var(--soft);
+      text-shadow: 0 0 10px rgba(168,85,247,0.45);
+    }
+
+    .subtitle{
+      margin-top: 10px;
+      font-size: 1rem;
+      opacity:0.95;
+      color: rgba(255,255,255,0.85);
+      font-weight:300;
+      line-height:1.5;
+    }
+
+    .subtitle strong{
+      color: var(--gold);
+      font-weight:600;
+      text-shadow: 0 0 12px rgba(247,215,116,0.35);
+    }
+
+    /* neon frase */
+    .neon-banner{
+      margin-top: 18px;
+      padding: 16px 18px;
+      border-radius: 18px;
+      border: 1px solid rgba(168,85,247,0.25);
+      background: rgba(0,0,0,0.35);
+      box-shadow: inset 0 0 22px rgba(168,85,247,0.12),
+                  0 0 28px rgba(168,85,247,0.15);
+    }
+
+    .neon-phrase{
+      font-family:'Playfair Display', serif;
+      font-size: 1.15rem;
+      line-height: 1.65;
+      color: #f7e9ff;
+      text-shadow:
+        0 0 6px rgba(168,85,247,0.55),
+        0 0 12px rgba(168,85,247,0.40),
+        0 0 18px rgba(168,85,247,0.30),
+        0 0 30px rgba(168,85,247,0.25);
+    }
+
+    .neon-name{
+      font-weight: 800;
+      color: #d8b4fe;
+      text-shadow:
+        0 0 6px rgba(168,85,247,0.85),
+        0 0 14px rgba(168,85,247,0.75),
+        0 0 28px rgba(168,85,247,0.55),
+        0 0 45px rgba(168,85,247,0.40);
+      letter-spacing: 1px;
+    }
+
+    /* layout main */
+    .grid{
+      display:grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 18px;
+      margin-top: 18px;
+    }
+
+    @media(max-width:900px){
+      .grid{grid-template-columns:1fr;}
+    }
+
+    /* carta */
+    .letter{
+      padding: 28px 24px;
+      border-radius: 24px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.03));
+      border: 1px solid rgba(168,85,247,0.25);
+      box-shadow: 0 18px 50px rgba(0,0,0,0.65);
+      position:relative;
+      overflow:hidden;
+    }
+
+    .letter::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:
+        radial-gradient(circle at 20% 10%, rgba(168,85,247,0.18), transparent 55%),
+        radial-gradient(circle at 85% 35%, rgba(255,79,216,0.12), transparent 60%),
+        radial-gradient(circle at 40% 90%, rgba(124,58,237,0.15), transparent 60%);
+      opacity:0.9;
+      pointer-events:none;
+    }
+
+    .letter-content{
+      position:relative;
+      z-index:2;
+    }
+
+    .date{
+      font-family:'Cinzel', serif;
+      font-size: 0.95rem;
+      color: rgba(255,255,255,0.78);
+      letter-spacing:1px;
+      margin-bottom: 16px;
+    }
+
+    .date span{
+      color: var(--gold);
+      font-weight:700;
+      text-shadow: 0 0 10px rgba(247,215,116,0.35);
+    }
+
+    .salute{
+      font-family:'Playfair Display', serif;
+      font-size: 1.35rem;
+      font-weight:700;
+      margin-bottom: 14px;
+      color: var(--soft);
+      text-shadow: 0 0 12px rgba(168,85,247,0.35);
+    }
+
+    .paragraph{
+      font-size: 1.02rem;
+      line-height: 1.9;
+      color: rgba(255,255,255,0.92);
+      margin-bottom: 16px;
+      text-align: justify;
+    }
+
+    .paragraph strong{
+      color: var(--gold);
+      text-shadow: 0 0 10px rgba(247,215,116,0.25);
+    }
+
+    .divider{
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(168,85,247,0.45), transparent);
+      margin: 18px 0;
+      border-radius: 999px;
+    }
+
+    .signature{
+      margin-top: 22px;
+      padding-top: 16px;
+      border-top: 1px dashed rgba(168,85,247,0.35);
+      font-family:'Playfair Display', serif;
+      font-size: 1.12rem;
+      line-height: 1.8;
+      color: rgba(255,255,255,0.92);
+    }
+
+    .signature strong{
+      color: #e9d5ff;
+      text-shadow: 0 0 16px rgba(168,85,247,0.35);
+      font-size: 1.18rem;
+    }
+
+    /* aside details */
+    .side{
+      display:flex;
+      flex-direction:column;
+      gap: 18px;
+    }
+
+    .card{
+      border-radius: 22px;
+      padding: 18px 16px;
+      background: rgba(0,0,0,0.35);
+      border: 1px solid rgba(168,85,247,0.22);
+      box-shadow: 0 15px 40px rgba(0,0,0,0.55);
+      position:relative;
+      overflow:hidden;
+    }
+
+    .card::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      background: radial-gradient(circle at top, rgba(168,85,247,0.20), transparent 70%);
+      opacity:0.8;
+      pointer-events:none;
+    }
+
+    .card h3{
+      position:relative;
+      z-index:2;
+      font-family:'Cinzel', serif;
+      font-size: 1.05rem;
+      letter-spacing: 1px;
+      margin-bottom: 12px;
+      color: var(--soft);
+      text-shadow: 0 0 12px rgba(168,85,247,0.35);
+    }
+
+    .card p{
+      position:relative;
+      z-index:2;
+      font-size: 0.95rem;
+      line-height: 1.6;
+      color: rgba(255,255,255,0.86);
+    }
+
+    /* imagen */
+    .image-frame{
+      margin-top: 10px;
+      width:100%;
+      aspect-ratio: 4/3;
+      border-radius: 18px;
+      border: 1px solid rgba(168,85,247,0.30);
+      overflow:hidden;
+      position:relative;
+      box-shadow: 0 0 25px rgba(168,85,247,0.18);
+      background: rgba(255,255,255,0.05);
+    }
+
+    .image-frame img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      display:block;
+      filter: contrast(1.05) saturate(1.1);
+      opacity:0.92;
+    }
+
+    .image-frame::after{
+      content:"Umbrella Academy Memory";
+      position:absolute;
+      bottom:10px;
+      left:12px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      font-size: 0.78rem;
+      letter-spacing: 0.8px;
+      background: rgba(0,0,0,0.55);
+      border: 1px solid rgba(168,85,247,0.30);
+      color: rgba(255,255,255,0.85);
+      backdrop-filter: blur(6px);
+    }
+
+    /* musica */
+    .music-box{
+      margin-top: 12px;
+      border-radius: 18px;
+      padding: 14px 12px;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(168,85,247,0.22);
+      box-shadow: inset 0 0 20px rgba(168,85,247,0.10);
+    }
+
+    audio{
+      width:100%;
+      outline:none;
+      border-radius: 12px;
+      filter: drop-shadow(0 0 10px rgba(168,85,247,0.25));
+    }
+
+    /* footer */
+    .footer{
+      text-align:center;
+      margin-top: 20px;
+      padding: 18px 14px;
+      opacity:0.95;
+      font-size: 0.9rem;
+      color: rgba(255,255,255,0.75);
+    }
+
+    .footer span{
+      color: var(--gold);
+      font-weight:600;
+      text-shadow: 0 0 12px rgba(247,215,116,0.25);
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+
+    <div class="header">
+      <div class="title">Carta en una Línea Temporal Perfecta</div>
+      <div class="subtitle">
+        Una carta escrita en la noche… cuando el universo calla y el corazón habla. <br>
+        Inspirada en <strong>Umbrella Academy</strong>, donde el amor también puede salvar el mundo.
+      </div>
+
+      <div class="neon-banner">
+        <div class="neon-phrase">
+          Si el tiempo se rompiera mil veces, si la Comisión intentara borrarnos, y si el universo se cayera a pedazos…
+          yo volvería por ti una y otra vez, porque en cada línea temporal mi destino siempre termina en
+          <strong class="neon-name">VALERIA PETRO VILLAZÓN</strong>
+        </div>
+      </div>
+    </div>
+
+    <div class="grid">
+
+      <!-- CARTA -->
+      <div class="letter">
+        <div class="letter-content">
+
+          <div class="date">
+            <span>Miércoles</span>, 22 de abril de 2026 — Noche
+          </div>
+
+          <div class="salute">Mi amor…</div>
+
+          <div class="paragraph">
+            Esta noche te escribo con el corazón abierto, como si fuera una puerta que solo tú sabes cruzar sin hacer ruido… 
+            pero dejando dentro de mí un temblor que lo cambia todo. Y mientras el mundo duerme, mientras la ciudad se apaga poco a poco, 
+            yo sigo despierto… porque hay algo en mi pecho que no me deja descansar: <strong>tú</strong>.
+          </div>
+
+          <div class="paragraph">
+            Hoy te pensé de una manera diferente… más intensa, más profunda, más inevitable. 
+            Como si el universo entero hubiera decidido volver a girar alrededor de tu nombre. 
+            Como si el destino, ese que en Umbrella Academy siempre juega con el tiempo, con las heridas, con los finales… 
+            hubiera decidido darme una oportunidad de tener lo único que realmente importa: <strong>amarte a ti</strong>.
+          </div>
+
+          <div class="paragraph">
+            Porque si algo aprendí de esa historia… es que el mundo puede acabarse mil veces, el tiempo puede romperse, el cielo puede partirse en dos…
+            pero lo que es real… lo que es verdadero… siempre encuentra la manera de volver.
+            Y tú, mi amor… tú eres eso. <strong>Eres lo que siempre vuelve.</strong>
+          </div>
+
+          <div class="divider"></div>
+
+          <div class="paragraph">
+            Esta noche quiero decirte algo que llevo guardado con demasiada fuerza: yo no te amo como se ama “normalmente”.
+            Yo te amo como si fueras el último lugar seguro en medio de un apocalipsis.
+            Te amo como si cada beso tuyo pudiera detener el fin del mundo.
+            Te amo como si tu cuerpo fuera el refugio perfecto cuando todo lo demás se derrumba.
+          </div>
+
+          <div class="paragraph">
+            Y es que tú eres mi propia Umbrella Academy… pero no una familia rota… sino mi hogar reconstruido. 
+            <strong>Mi salvación.</strong>
+          </div>
+
+          <div class="paragraph">
+            Si el mundo fuera como esa serie… yo no tendría dudas de cuál sería mi misión.
+          </div>
+
+          <div class="paragraph">
+            Porque si Five fue capaz de saltar en el tiempo, destruirse por dentro, caminar entre cadáveres y sobrevivir años de soledad solo para salvar a los suyos…
+            <strong>yo sería capaz de lo mismo por ti.</strong>
+          </div>
+
+          <div class="paragraph">
+            Si yo tuviera que atravesar décadas enteras, perderme en futuros imposibles, sangrar, caer, levantarme, volver a caer… lo haría sin pensarlo.
+            Porque tú vales más que cualquier línea temporal.
+          </div>
+
+          <div class="paragraph">
+            Porque tú eres mi final favorito. Mi destino. Mi punto de llegada.
+          </div>
+
+          <div class="divider"></div>
+
+          <div class="paragraph">
+            Y aunque no tenga poderes sobrenaturales… amor, te juro que lo que siento por ti se parece demasiado a uno.
+          </div>
+
+          <div class="paragraph">
+            Porque cuando tú me miras, algo en mí cambia. Y no es poesía barata… es verdad.
+          </div>
+
+          <div class="paragraph">
+            Cuando tú me miras, me vuelvo más fuerte. Cuando tú me hablas, se me calma la guerra. 
+            Cuando tú sonríes, siento que el universo se acomoda.
+          </div>
+
+          <div class="paragraph">
+            Tú eres mi propia anomalía hermosa. Mi error perfecto del destino. El milagro que no estaba planeado… pero que se volvió imprescindible.
+          </div>
+
+          <div class="divider"></div>
+
+          <div class="paragraph">
+            Y si tú fueras una de ellos… yo sé exactamente quién serías.
+          </div>
+
+          <div class="paragraph">
+            Serías como Vanya/Viktor… porque dentro de ti vive una fuerza enorme, poderosa, profunda… y aunque el mundo no siempre lo entienda, yo sí.
+            Yo sé que tú tienes un corazón capaz de destruirlo todo… y también de salvarlo todo.
+          </div>
+
+          <div class="paragraph">
+            Serías como Allison… porque tus palabras, tus gestos, tu presencia… tienen algo que hipnotiza.
+            Tú no necesitas decir “I heard a rumor”… porque conmigo, amor… tú solo necesitas existir, y ya haces que yo me rinda.
+          </div>
+
+          <div class="paragraph">
+            Serías como Klaus… porque tienes esa magia de hacer que incluso lo triste tenga belleza.
+            Porque tú puedes convertir una noche vacía en algo inolvidable con solo estar ahí.
+          </div>
+
+          <div class="paragraph">
+            Serías como Luther… porque eres leal. Porque amas con fuerza, con entrega, con verdad.
+          </div>
+
+          <div class="paragraph">
+            Serías como Diego… porque tienes fuego, carácter, intensidad… y aunque a veces parezcas dura por fuera, yo sé lo que hay dentro:
+            un corazón que siente demasiado.
+          </div>
+
+          <div class="paragraph">
+            Serías como Ben… porque incluso cuando no dices nada, tu esencia se siente. Tu amor se siente.
+          </div>
+
+          <div class="paragraph">
+            Pero la verdad… tú no eres una copia de nadie. Tú eres mi propia versión de lo imposible.
+            Tú eres esa persona que aparece en la historia de alguien y lo cambia todo para siempre.
+            Y yo… yo soy el hombre que tuvo la suerte de encontrarte.
+          </div>
+
+          <div class="divider"></div>
+
+          <div class="paragraph">
+            Mi amor… si el mundo se rompiera como se rompe el tiempo en Umbrella Academy, si el cielo se abriera y todo empezara a arder, si hubiera caos, gritos, ruinas…
+            yo te buscaría entre el humo. Te encontraría.
+          </div>
+
+          <div class="paragraph">
+            Y te abrazaría tan fuerte… tan fuerte… que aunque el universo entero se estuviera desmoronando, tú sentirías en mi pecho una verdad absoluta:
+            <strong>mientras yo exista, tú no estás sola.</strong>
+          </div>
+
+          <div class="divider"></div>
+
+          <div class="paragraph">
+            Porque tú eres lo único que yo salvaría sin pensarlo. Lo único que defendería incluso si me costara la vida.
+            Lo único que elegiría aunque todo el mundo me dijera que no.
+          </div>
+
+          <div class="paragraph">
+            Y es que tú… tú eres mi razón. Y cuando digo “razón”, no me refiero a algo pequeño.
+            Me refiero a esa razón que te mantiene vivo cuando ya no queda nada.
+          </div>
+
+          <div class="paragraph">
+            Hay noches en las que siento que mi vida antes de ti era como la casa de los Hargreeves: enorme… pero vacía.
+            Llena de pasillos… pero sin calor.
+          </div>
+
+          <div class="paragraph">
+            Y llegaste tú… y fue como si alguien encendiera todas las luces. Como si el aire cambiara. Como si el mundo se volviera habitable.
+            Tú me haces sentir que pertenezco. Y eso… eso es algo que no se encuentra fácil.
+          </div>
+
+          <div class="divider"></div>
+
+          <div class="paragraph">
+            Mi amor… yo quiero confesarte algo esta noche:
+          </div>
+
+          <div class="paragraph">
+            A veces pienso que tú eres mi Hotel Obsidian. Ese lugar extraño donde todo parece normal… pero dentro guarda secretos.
+            Porque tú, por fuera, puedes parecer tranquila… pero dentro de ti hay un universo entero.
+          </div>
+
+          <div class="paragraph">
+            Hay sentimientos. Hay sueños. Hay heridas. Hay belleza. Hay una historia que me muero por conocer completa.
+          </div>
+
+          <div class="paragraph">
+            Y yo no quiero amarte a medias. No quiero besarte a medias. No quiero cuidarte a medias.
+          </div>
+
+          <div class="paragraph">
+            Yo quiero amarte como se ama cuando ya no hay vuelta atrás. Como se ama cuando el amor se convierte en destino.
+            Yo quiero ser para ti lo que nadie ha sido.
+          </div>
+
+          <div class="paragraph">
+            Quiero ser tu calma cuando el mundo te golpee. Quiero ser tu abrigo cuando sientas frío por dentro. Quiero ser tu lugar seguro.
+          </div>
+
+          <div class="paragraph">
+            Y también… mi amor… quiero ser ese deseo que no puedes olvidar. Porque yo te deseo con una intensidad que me asusta.
+          </div>
+
+          <div class="paragraph">
+            Te deseo con el alma, con la mente, con la piel.
+          </div>
+
+          <div class="paragraph">
+            Te deseo cuando estás lejos. Te deseo cuando estás cerca.
+            Te deseo cuando sonríes, cuando te enojas, cuando te quedas callada, cuando me miras como si no supieras el poder que tienes sobre mí.
+          </div>
+
+          <div class="divider"></div>
+
+          <div class="paragraph">
+            Y es que tú tienes un poder… tú tienes el poder de volverme débil… y al mismo tiempo, el poder de volverme invencible.
+          </div>
+
+          <div class="paragraph">
+            Tú me haces sentir como si yo también fuera parte de algo grande. Como si mi vida tuviera un propósito.
+            Como si el universo me hubiera escogido para amarte.
+          </div>
+
+          <div class="paragraph">
+            Mi amor… si la Comisión existiera de verdad… si esos hombres del tiempo vinieran a decirme que tú y yo no debemos estar juntos, que nuestro amor es una “anomalía”, que somos un error en la línea temporal…
+            ¿Sabes qué haría yo?
+          </div>
+
+          <div class="paragraph">
+            Me reiría. Porque si amarte es un error… entonces que se rompa el tiempo. Que se caiga el cielo. Que arda el mundo.
+          </div>
+
+          <div class="paragraph">
+            Porque yo prefiero un universo destruido contigo… que un universo perfecto sin ti.
+          </div>
+
+          <div class="paragraph">
+            Y no lo digo por exagerar… lo digo porque mi corazón ya tomó una decisión hace mucho:
+            <strong>yo te elijo.</strong>
+          </div>
+
+          <div class="paragraph">
+            Te elijo en todos los universos. Te elijo en todas las líneas temporales.
+            Te elijo incluso si el destino nos pone obstáculos. Te elijo incluso si me duele.
+          </div>
+
+          <div class="divider"></div>
+
+          <div class="paragraph">
+            Porque tú eres mi amor más real. El más puro. El más intenso.
+          </div>
+
+          <div class="paragraph">
+            Y esta noche, amor… esta noche me imagino contigo.
+          </div>
+
+          <div class="paragraph">
+            Me imagino abrazándote en silencio, con la cabeza apoyada en tu pecho, escuchando tu respiración… y sintiendo que en ese sonido vive la paz que yo siempre busqué.
+          </div>
+
+          <div class="paragraph">
+            Me imagino besándote despacio… como si cada beso fuera un juramento. Como si cada caricia fuera una promesa.
+          </div>
+
+          <div class="paragraph">
+            Me imagino recorriéndote con ternura… con hambre… con amor.
+            Porque yo no te amo solo con el corazón. Yo te amo con todo lo que soy.
+          </div>
+
+          <div class="paragraph">
+            Y si supieras lo que me pasa cuando pienso en ti…
+            Me tiemblan las manos. Se me acelera el pulso. Me arde el pecho.
+          </div>
+
+          <div class="paragraph">
+            Y no es ansiedad… es amor. Es deseo. Es esa necesidad de tenerte cerca… de sentirte… de abrazarte como si te estuviera recuperando después de perderte en otra vida.
+          </div>
+
+          <div class="paragraph">
+            Porque a veces siento que tú y yo ya nos amamos antes. Como si fuéramos una historia repetida en distintas realidades.
+            Como si tú fueras esa persona que mi alma reconoce.
+          </div>
+
+          <div class="divider"></div>
+
+          <div class="paragraph">
+            Mi amor… yo quiero que lo sepas bien claro esta noche:
+          </div>
+
+          <div class="paragraph">
+            Si yo fuera Five, tú serías la única razón por la que yo volvería una y otra vez al pasado.
+            Porque tu amor vale más que cualquier futuro.
+          </div>
+
+          <div class="paragraph">
+            Si yo fuera Diego, yo pelearía contra el mundo entero por protegerte. Y si me rompieran, me levantaría igual.
+          </div>
+
+          <div class="paragraph">
+            Si yo fuera Klaus, yo me reiría del dolor, pero lloraría por ti… porque tú sí me importarías de verdad.
+          </div>
+
+          <div class="paragraph">
+            Si yo fuera Luther, yo te miraría como se mira un sueño… con adoración, con respeto, con devoción.
+          </div>
+
+          <div class="paragraph">
+            Si yo fuera Allison, yo no necesitaría rumores… porque contigo yo solo necesitaría decir: “ven”… y el universo entero obedecería.
+          </div>
+
+          <div class="paragraph">
+            Pero no soy ninguno de ellos… soy yo.
+          </div>
+
+          <div class="paragraph">
+            Y aun así… amor… aun así te juro que mi amor por ti es tan grande que podría ser un poder.
+          </div>
+
+          <div class="paragraph">
+            Porque tú me cambiaste. Tú me hiciste sentir. Tú me hiciste querer ser mejor.
+          </div>
+
+          <div class="paragraph">
+            Y aunque a veces la vida sea difícil, aunque haya días donde todo parezca pesado… cuando pienso en ti, se me reinicia el alma.
+          </div>
+
+          <div class="divider"></div>
+
+          <div class="paragraph">
+            Y esta noche, mi amor… quiero que sientas mi corazón contigo.
+            Quiero que sientas que te estoy abrazando aunque sea con palabras.
+          </div>
+
+          <div class="paragraph">
+            Quiero que sientas que mi amor no es frágil… mi amor por ti es como esos eventos inevitables del tiempo:
+            <strong>no se puede borrar.</strong>
+          </div>
+
+          <div class="paragraph">
+            No se puede negar. No se puede detener. Porque tú ya estás escrita en mí.
+          </div>
+
+          <div class="paragraph">
+            Y si el universo tuviera un libro con mi historia… en cada página habría algo tuyo:
+          </div>
+
+          <div class="paragraph">
+            Tu nombre. Tu risa. Tu mirada. Tu voz. Tu forma de existir.
+          </div>
+
+          <div class="divider"></div>
+
+          <div class="paragraph">
+            Y si algún día, amor… algún día el mundo se pone oscuro, si la vida te golpea, si te sientes perdida, si sientes que todo se rompe…
+            recuerda esto:
+          </div>
+
+          <div class="paragraph">
+            Yo voy a estar ahí. Aunque no me veas. Aunque no me escuches. Aunque el tiempo se doble.
+            Aunque el destino intente separarnos.
+            Yo voy a estar ahí.
+          </div>
+
+          <div class="paragraph">
+            Como una promesa. Como un hogar. Como un amor que no se rinde.
+          </div>
+
+          <div class="divider"></div>
+
+          <div class="paragraph">
+            Y ahora… antes de terminar esta carta… quiero decirte lo más importante:
+          </div>
+
+          <div class="paragraph">
+            <strong>Yo te amo.</strong>
+          </div>
+
+          <div class="paragraph">
+            Pero no como se dice rápido. No como se dice por costumbre.
+            Yo te amo como se ama cuando el corazón ya no tiene salvación.
+          </div>
+
+          <div class="paragraph">
+            Te amo con una intensidad que no cabe en mi cuerpo.
+            Te amo con un deseo que me consume.
+            Te amo con una ternura que me desarma.
+            Te amo con una lealtad que ni el fin del mundo podría quebrar.
+          </div>
+
+          <div class="paragraph">
+            Y si algún día el universo decide poner una última prueba… si algún día todo se derrumba…
+            tú solo mírame.
+          </div>
+
+          <div class="paragraph">
+            Y verás que yo sigo ahí.
+          </div>
+
+          <div class="paragraph">
+            Porque tú eres mi persona. Mi amor verdadero. Mi historia favorita.
+            Mi apocalipsis favorito. Mi milagro. Mi destino.
+          </div>
+
+          <div class="paragraph">
+            Mi Umbrella Academy… pero hecha perfecta, hecha hermosa, hecha para salvarme.
+          </div>
+
+          <div class="divider"></div>
+
+          <div class="paragraph">
+            Buenas noches, mi vida…
+          </div>
+
+          <div class="paragraph">
+            Ojalá esta noche sueñes conmigo. Ojalá el universo te abrace suave.
+            Ojalá sientas mi amor envolviéndote como si fuera una manta cálida.
+          </div>
+
+          <div class="paragraph">
+            Y si el mundo se acaba mañana… yo quiero que hoy, esta noche, quede escrito en el tiempo lo único que importa:
+          </div>
+
+          <div class="paragraph">
+            <strong>te amo con todo lo que soy… y con todo lo que seré.</strong>
+          </div>
+
+          <div class="signature">
+            Siempre tuyo,<br>
+            tu hombre… tu refugio… tu final feliz. ❤️☂️✨<br>
+            <strong>JUAN KALETH MENDOZA PRIMERA 💜</strong>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- DETALLES -->
+      <div class="side">
+
+        <div class="card">
+          <h3>☂️ Recuerdo de la Serie</h3>
+          <p>
+            Aquí puedes poner una imagen especial de Umbrella Academy que te recuerde a ustedes.
+            Puede ser una escena, un póster, o un momento icónico que represente su historia.
+          </p>
+
+          <!-- ESPACIO PARA IMAGEN -->
+          <div class="image-frame">
+            <!-- Cambia "umbrella.jpg" por tu imagen -->
+            <img src="umbrella.jpg" alt="Imagen Umbrella Academy">
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>🎶 Música de Nuestra Línea Temporal</h3>
+          <p>
+            Pon aquí una canción relacionada con Umbrella Academy (puede ser una canción icónica de la serie o una que te recuerde a ella).
+            Cuando le des play, será como abrir un portal directo a su historia.
+          </p>
+
+          <!-- ESPACIO PARA MÚSICA -->
+          <div class="music-box">
+            <!-- Cambia "song.mp3" por tu archivo -->
+            <audio controls>
+              <source src="song.mp3" type="audio/mpeg">
+              Tu navegador no soporta audio.
+            </audio>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>🕰️ Detalle de la Comisión</h3>
+          <p>
+            Si alguien intentara borrar esta historia, la Comisión fallaría…
+            porque este amor no es un error.
+            <br><br>
+            Este amor es una <strong>misión eterna</strong>.
+          </p>
+        </div>
+
+        <div class="card">
+          <h3>✨ Código Secreto</h3>
+          <p>
+            Si alguna vez el mundo se rompe…  
+            si alguna vez el tiempo se dobla…
+            <br><br>
+            tú solo di: <strong>“Juan, vuelve por mí”</strong>  
+            y yo seré tu Five… regresando por ti.
+          </p>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="footer">
+      Hecho con amor, con caos, con destino… y con un corazón que siempre vuelve a ti.  
+      <br>
+      <span>☂️ Umbrella Academy Vibes — Amor Infinito</span>
+    </div>
+
+  </div>
+</body>
+  </html>
